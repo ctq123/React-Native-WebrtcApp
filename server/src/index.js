@@ -1,6 +1,9 @@
-const { ApolloServer, gql, PubSub } = require('apollo-server');
-const { withFilter } = require('graphql-subscriptions');
+const express = require('express');
+const { ApolloServer, gql } = require('apollo-server-express');
+const { withFilter, PubSub } = require('graphql-subscriptions');
 const { WebSocketServer } = require('ws');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+const { useServer } = require('graphql-ws/lib/use/ws');
 const http = require('http');
 
 // In-memory room management (use a database in production)
@@ -105,30 +108,41 @@ const resolvers = {
   },
 };
 
+const app = express();
+
 // Initialize PubSub
 const pubsub = new PubSub();
 
-// Initialize Apollo Server
+// Create GraphQL schema
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+// Create an ApolloServer instance
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   graphqlPath: '/graphql',
   context: { pubsub },
 });
 
-// Create HTTP server
-const httpServer = http.createServer(server);
 
-// Create WebSocket server
-const wsServer = new WebSocketServer({
-  server: httpServer,
-  path: server.graphqlPath,
-});
+server.start().then(() => {
+  server.applyMiddleware({ app });
 
-// Set up WebSocket server to handle subscriptions
-server.installSubscriptionHandlers(wsServer);
+  // Create an HTTP server
+  const httpServer = http.createServer(app);
 
-// Start server
-httpServer.listen(4000, () => {
-  console.log(`Server is running on http://localhost:4000${server.graphqlPath}`);
+  // Create a WebSocket server
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: server.graphqlPath,
+  });
+
+  // Use graphql-ws to handle WebSocket connections
+  useServer({ schema }, wsServer); // This is NOT a React hook, it should be used at the top level in server code
+
+  // Start the HTTP server with WebSocket support
+  const PORT = 4000;
+  httpServer.listen(PORT, () => {
+    console.log(`Server is now running on http://localhost:${PORT}/graphql`);
+    console.log(`WebSocket is now running on ws://localhost:${PORT}/graphql`);
+  });
 });

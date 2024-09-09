@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet, TextInput } from 'react-native';
 import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
-import CallComponent from './CallComponent';
+import CallComponent from './CallComponent.tsx';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql', // 替换为你的 GraphQL 服务器地址

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, SafeAreaView } from 'react-native';
-import Constants from './utils/Constants';
-import InitView from './components/InitView';
-import CallView from './components/CallView';
-import JoinView from './components/JoinView';
+import Constants from './utils/Constants.ts';
+import InitView from './components/InitView.tsx';
+import CallView from './components/CallView.tsx';
+import JoinView from './components/JoinView.tsx';
 
 export default function RoomPage() {
   const [view, setView] = useState(Constants.ViewType.INIT);

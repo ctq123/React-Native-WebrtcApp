@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 // import RoomPage from './src/RoomPage';
-import ExamplePage from './src/example/ExamplePage';
+import ExamplePage from './src/example/ExamplePage.tsx';
 
 function App(): React.JSX.Element {
 
