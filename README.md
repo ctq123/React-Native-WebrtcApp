@@ -1,7 +1,7 @@
 This is a [**React Native**](https://reactnative.dev) application for multi-party meetings.
 
-### tech stack
-react-native + webrtc + graphql + graphql-subscriptions
+## tech stack
+#### react-native + webrtc + graphql + graphql-subscriptions
 
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
