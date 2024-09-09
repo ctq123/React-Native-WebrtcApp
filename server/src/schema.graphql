@@ -1,0 +1,29 @@
+# schema.graphql
+type Query {
+  _: Boolean
+}
+
+type Mutation {
+  createRoom(roomId: String!): Boolean
+  joinRoom(roomId: String!, userId: String!): Boolean
+  sendOffer(roomId: String!, sdp: String!): Boolean
+  sendAnswer(roomId: String!, sdp: String!): Boolean
+  sendIceCandidate(roomId: String!, candidate: String!): Boolean
+}
+
+type Subscription {
+  roomUpdates(roomId: String!): RoomUpdate
+}
+
+type RoomUpdate {
+  remoteSdp: SDP
+  iceCandidates: [ICECandidate]
+}
+
+type SDP {
+  sdp: String!
+}
+
+type ICECandidate {
+  candidate: String!
+}
