@@ -8,19 +8,20 @@
 import React from 'react';
 import {
   SafeAreaView,
+  Platform,
+  Text,
 } from 'react-native';
 
 // import RoomPage from './src/RoomPage';
-import ExamplePage from './src/example/ExamplePage.tsx';
+import ExamplePage from './src/example/ExamplePage';
 
-function App(): React.JSX.Element {
+export default function App() {
 
   return (
     <SafeAreaView>
+      <Text>{Platform.OS === 'web' ? 'This is Web.' : 'This is Mobile.'}</Text>
       {/* <RoomPage /> */}
       <ExamplePage />
     </SafeAreaView>
   );
 }
-
-export default App;

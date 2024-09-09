@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, Alert } from 'react-native';
 import { mediaDevices, RTCView, MediaStream } from 'react-native-webrtc';

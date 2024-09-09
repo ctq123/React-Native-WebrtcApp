@@ -1,52 +1,38 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development', // 设置为 'development' 或 'production'
-  entry: './index.js', // 入口文件
+  entry: path.resolve(__dirname, './index.web.js'), // 入口文件
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'), // 输出的路径
+    filename: 'bundle.js',  // 打包后文件
     publicPath: '/',
   },
   resolve: {
     alias: {
       'react-native$': 'react-native-web',
     },
-    extensions: ['.js', '.jsx', '.json'],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
+        test: /\.(js|jsx)$/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
+          options: {}
         },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ],
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'assets/images',
-            },
+        use: {
+          loader: 'file-loader',
+          options: {
+            // name: 'images/[name].[ext]'
           },
-        ],
+        },
+        exclude: /node_modules/,
       },
     ],
   },
@@ -54,17 +40,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
   ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
     open: true,
-    compress: true,
     port: 3000,
-    historyApiFallback: true,
   },
 };
