@@ -33,7 +33,7 @@
         android:id="@+id/line"/>
 
     <TextView
-        android:text="掘金"
+        android:text="视频"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="高质量的技术社区"
+        android:text="评论区"
         android:textColor="#fff"
         android:textSize="17dp"
         android:layout_toRightOf="@id/line"
