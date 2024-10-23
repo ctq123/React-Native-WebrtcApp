@@ -1,5 +1,8 @@
 This is a [**React Native**](https://reactnative.dev) application for multi-party meetings.
 
+![image](https://github.com/user-attachments/assets/4f800290-7b19-459b-a5cc-21470573f4bd)
+
+
 ## tech stack
 #### react-native + webrtc + graphql + graphql-subscriptions
 
