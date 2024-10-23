@@ -1,15 +1,11 @@
-package com.juejinclient.util;
+package com.webrtcapp.util;
 
 import android.app.Activity;
 import android.app.Dialog;
 
-import com.juejinclient.R;
+import com.webrtcapp.R;
 
 import java.lang.ref.WeakReference;
-
-/**
- * Created by wangdi on 14/11/16.
- */
 
 public class SplashScreen {
     private static Dialog mSplashDialog;
